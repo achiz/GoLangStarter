@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"golang.org/x/tour/pic"
 	"math"
 )
 
@@ -25,6 +26,7 @@ func split(sum int) (x, y int) {
 /** Variables **/
 var x, y, z int = 1, 2, 3
 var c, python, java = true, false, "no!"
+
 //var c, python, java bool
 
 /** Constants **/
@@ -71,15 +73,28 @@ var (
 	s = Vertex{}
 )
 
-
 /** Make Slice **/
-func printSlice( s string, x []int ) {
-	fmt.Printf("%s len=%d cap=%d %v\n" , s, len(x), cap(x), x )
+func printSlice(s string, x []int) {
+	fmt.Printf("%s len=%d cap=%d %v\n", s, len(x), cap(x), x)
 }
-
 
 /** Range **/
 var ppow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+/** Excercise : Slices **/
+func Pic(dx, dy int) [][]uint8 {
+
+	picture := make([][]uint8, dy)
+
+	for i := 0; i < dy; i++ {
+		picture[i] = make([]uint8, dx)
+		for j := 0; j < dx; j++ {
+			picture[i][j] = uint8((i - j) * (i + j))
+		}
+	}
+
+	return picture
+}
 
 func main() {
 	/** func **/
@@ -154,7 +169,6 @@ func main() {
 	//	fmt.Printf("p[%d] == %d\n",i ,p[i])
 	//}
 
-
 	/** Slices **/
 	//p := []int{2, 3, 5, 7, 11, 13}
 	//fmt.Println("p == " , p )
@@ -162,7 +176,6 @@ func main() {
 	//
 	//fmt.Println("p[:3] == ", p[:3])
 	//fmt.Println("p[4:] == ", p[4:])
-
 
 	/** Make Slice **/
 	//a := make([]int, 5)
@@ -184,17 +197,7 @@ func main() {
 	//	fmt.Printf("2**%d = %d\n", i, v)
 	//}
 
-	xpow := make([]int, 10)
-	for i := range xpow {
-		xpow[i] = 1 << uint(i)
-	}
-
-	for _, value := range xpow {
-		fmt.Printf("%d\n", value)
-	}
-
-
-
-
+	//pic
+	pic.Show(Pic)
 
 }
