@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"golang.org/x/tour/pic"
 	"math"
+	"runtime"
 )
 
 /** Func **/
@@ -94,6 +94,38 @@ func Pic(dx, dy int) [][]uint8 {
 	}
 
 	return picture
+}
+
+/** Maps **/
+type Vertexx struct {
+	Lat, Long float64
+}
+
+var m map[string]Vertexx
+
+var mm = map[string]Vertexx{
+	"Bell Labs": Vertexx{
+		40.68433, -74.39967,
+	},
+	"Google": Vertexx{
+		37.42202, -122.08408,
+	},
+
+	"Bell Labss": {
+		40.68433, -74.39967,
+	},
+	"Googlee": {
+		37.42202, -122.08408,
+	},
+}
+
+/** Function closures **/
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
 }
 
 func main() {
@@ -190,14 +222,64 @@ func main() {
 	//fmt.Println(z, len(z), cap(z))
 	//if z == nil {
 	//	fmt.Println("nil!")
-	//}
-
-	/** Range **/
-	//for i, v := range ppow {
+	//}	/** Range **/
+	//for i, v := range ppow {a
 	//	fmt.Printf("2**%d = %d\n", i, v)
 	//}
 
-	//pic
-	pic.Show(Pic)
+	/** pic **/
+	//pic.Show(Pic)
+
+	/** Maps **/
+	//m = make(map[string]Vertexx)
+	//m["Bell Labs"] = Vertexx{
+	//	40.68433, -74.39967,
+	//}
+	//fmt.Println(m["Bell Labs"])
+	//fmt.Println(mm)
+
+	/** Mutating Maps **/
+	//zm := make(map[string]int)
+	//
+	//zm["Answer"] = 42
+	//fmt.Println("The Value:" , zm["Answer"])
+	//
+	//zm["Answer"] = 48
+	//fmt.Println("The Value:" , zm["Answer"])
+	//
+	//delete(zm, "Answer")
+	//fmt.Println("The Value:" , zm["Answer"])
+	//
+	//v, ok := zm["Answer"]
+	//fmt.Println("The Value:" , v, "Present?", ok)
+
+	/** Function values **/
+	//hypot := func(x, y float64) float64 {
+	//	return math.Sqrt(x*x + y*y)
+	//}
+	//
+	//fmt.Println(hypot)
+
+	/** Functino closures **/
+	//pos, neg := adder(), adder()
+	//for i := 0; i < 10; i++ {
+	//	fmt.Println(
+	//		pos(i),
+	//		neg(-2*i),
+	//		)
+	//}
+
+	/** Switch **/
+	fmt.Print("Go runs on ")
+
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X.")
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		fmt.Printf("%s", os)
+
+	}
 
 }
