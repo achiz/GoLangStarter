@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"runtime"
 )
 
 /** Func **/
@@ -126,6 +125,34 @@ func adder() func(int) int {
 		sum += x
 		return sum
 	}
+}
+
+/** Method **/
+type Vertexxx struct {
+	X, Y float64
+}
+
+func (v *Vertexxx) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func (v *Vertexxx) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+/** Interface **/
+type Abser interface {
+	Abs() float64
 }
 
 func main() {
@@ -270,16 +297,37 @@ func main() {
 	//}
 
 	/** Switch **/
-	fmt.Print("Go runs on ")
+	//fmt.Print("Go runs on ")
+	//
+	//switch os := runtime.GOOS; os {
+	//case "darwin":
+	//	fmt.Println("OS X.")
+	//case "linux":
+	//	fmt.Println("Linux.")
+	//default:
+	//	fmt.Printf("%s", os)
+	//}
 
-	switch os := runtime.GOOS; os {
-	case "darwin":
-		fmt.Println("OS X.")
-	case "linux":
-		fmt.Println("Linux.")
-	default:
-		fmt.Printf("%s", os)
+	/** Methods **/
+	//vv := &Vertexxx{3,  4 }
+	//fmt.Println(vv.Abs())
 
-	}
+	//ff := MyFloat(-math.Sqrt2)
+	//fmt.Println(ff.Abs())
+
+	//ss := &Vertexxx{3, 4}
+	//ss.Scale(5)
+	//fmt.Println(ss, ss.Abs())
+
+	/** Interface **/
+	//var a Abser
+	//f := MyFloat(-math.Sqrt2)
+	//v := Vertexxx{3,4}
+	//
+	//a = f
+	//a = &v
+	//a = v
+	//
+	//fmt.Println(a.Abs())
 
 }
